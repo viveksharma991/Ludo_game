@@ -1,0 +1,784 @@
+/* ================================
+   MODERN LUDO UI
+================================ */
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, #263b78, transparent 35%),
+        radial-gradient(circle at bottom right, #54245f, transparent 35%),
+        #080d20;
+
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.game-container {
+    width: min(1400px, 95%);
+    margin: auto;
+    padding: 30px 0;
+}
+
+/* HEADER */
+
+.game-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.game-header h1 {
+    font-size: 42px;
+    margin: 0;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px rgba(255,255,255,.3);
+}
+
+.game-header p {
+    margin-top: 5px;
+    color: #aeb8df;
+    font-size: 18px;
+}
+
+
+/* MAIN LAYOUT */
+
+.game-layout {
+    display: grid;
+    grid-template-columns: 200px minmax(300px, 736px) 200px 200px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+
+/* CENTER BOARD */
+
+.center-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.board {
+    position: relative;
+    padding: 18px;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5),
+        inset 0 0 30px rgba(255,255,255,.04);
+}
+
+
+/* IMPORTANT */
+
+.ludoBoard {
+    width: 400px !important;
+    height: 400px !important;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 30px rgba(255,255,255,.15);
+}
+
+
+/* PLAYER CARDS */
+
+.player-card {
+    padding: 18px;
+    margin: 15px 0;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.3);
+
+    transition: .3s;
+}
+
+.player-card:hover {
+    transform: translateY(-4px);
+}
+
+.player-card h3 {
+    margin: 5px 0;
+}
+
+.player-card span {
+    font-size: 14px;
+}
+
+.player-icon {
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.mini-chips {
+    margin-top: 12px;
+    font-size: 18px;
+    letter-spacing: 5px;
+}
+
+
+/* PLAYER COLORS */
+
+.red-player {
+    border-color: #ff3150;
+}
+
+.green-player {
+    border-color: #27d95f;
+}
+
+.yellow-player {
+    border-color: #ffc400;
+}
+
+.blue-player {
+    border-color: #2196ff;
+}
+
+
+/* TURN CARD */
+
+.turn-card {
+    padding: 25px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.07);
+
+    border: 1px solid #ffbd4a;
+
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.turn-card small {
+    color: #ffc857;
+}
+
+.turn-card h2 {
+    margin: 10px 0 0;
+}
+
+
+/* DICE CARD */
+
+.dice-card {
+    margin: 20px 0;
+    padding: 25px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid #5c9dff;
+}
+
+.dice-card h2 {
+    margin-top: 15px;
+}
+
+
+/* GOOD LUCK */
+
+.good-luck {
+    margin-top: 20px;
+
+    padding: 14px 50px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid #3879ff;
+
+    font-size: 20px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+
+/* BOTTOM */
+
+.bottom-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    margin-top: 25px;
+}
+
+.bottom-buttons button {
+    padding: 12px 28px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.08);
+
+    color: white;
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    transition: .3s;
+}
+
+.bottom-buttons button:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,.15);
+}
+
+
+.roll-btn {
+    width: 100%;
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(135deg, #ffb300, #ff7a00);
+
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+    box-shadow: 0 8px 20px rgba(255, 140, 0, .25);
+}
+
+.roll-btn:hover {
+    transform: translateY(-3px);
+}
+
+.roll-btn:active {
+    transform: scale(.96);
+}
+
+.dice-result {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,.1);
+
+    font-size: 38px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+
+    .game-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .left-panel,
+    .right-panel {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .player-card {
+        width: 220px;
+    }
+
+    .ludoBoard {
+        width: 90vw !important;
+        height: 90vw !important;
+        max-width: 420px;
+        max-height: 420px;
+    }
+}
+
+
+/* ===== 500px LUDO BOARD ===== */
+
+.center-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Board ka outer container */
+.center-game .board {
+    width: 636px !important;
+    height: 636px !important;
+
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    padding: 18px;
+    box-sizing: border-box;
+
+    margin: 0 auto;
+}
+
+/* Actual Ludo Board */
+.center-game .ludoBoard {
+    width: 600px !important;
+    height: 600px !important;
+
+    margin: 0 auto;
+    flex-shrink: 0;
+}
+
+.board-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.good-luck {
+    margin: 0;
+    min-width: 210px;
+    padding: 14px 25px;
+}
+
+.bottom-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+}
+
+.game-btn {
+    min-width: 210px;
+    padding: 14px 25px;
+}
+
+/* =========================================
+   PLAYER CARD VALUES
+========================================= */
+
+.player-card {
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+/* Player chip values container */
+
+.mini-chips {
+    margin-top: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    width: 100%;
+
+    letter-spacing: normal;
+}
+
+
+/* Individual chip row */
+
+.chip-value {
+
+    width: 100%;
+    min-width: 0;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 6px 9px;
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,0.06);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    font-size: 13px;
+
+    transition: 0.2s ease;
+}
+
+
+/* Hover */
+
+.chip-value:hover {
+
+    background: rgba(255,255,255,0.12);
+
+    transform: translateX(2px);
+}
+
+
+/* Small chip icon */
+
+.chip-value > span {
+
+    font-size: 18px;
+
+    line-height: 1;
+}
+
+
+/* Position value */
+
+.chip-value b {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: white;
+
+    min-width: 48px;
+
+    text-align: right;
+}
+
+
+/* Score */
+
+.player-score {
+
+    margin-top: 13px;
+
+    padding-top: 10px;
+
+    border-top: 1px solid rgba(255,255,255,0.12);
+
+    font-size: 14px;
+
+    color: #bfc8e8;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.player-score b {
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================
+   PLAYER COLORS
+========================================= */
+
+.red-player .chip-value > span {
+    color: #ff3150;
+}
+
+.green-player .chip-value > span {
+    color: #27d95f;
+}
+
+.yellow-player .chip-value > span {
+    color: #ffc400;
+}
+
+.blue-player .chip-value > span {
+    color: #2196ff;
+}
+
+
+/* Active chip */
+
+.chip-value.active {
+
+    border-color: rgba(255,255,255,0.3);
+
+    background: rgba(255,255,255,0.10);
+
+}
+
+
+/* Finished chip */
+
+.chip-value.finished b {
+
+    color: #6dff9b;
+}
+
+
+/* Home chip */
+
+.chip-value.home b {
+
+    color: #aeb8df;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .player-card {
+        width: 220px;
+    }
+
+    .chip-value {
+        padding: 6px 8px;
+    }
+
+}
+
+
+.dice-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.dice-player {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    transition: .25s;
+}
+
+.dice-player.active-dice {
+    border-color: #ffbd4a;
+
+    background: rgba(255,189,74,.12);
+
+    box-shadow: 0 0 15px rgba(255,189,74,.35);
+
+    transform: scale(1.05);
+}
+
+.dice-player .dice {
+    cursor: pointer;
+}
+
+
+
+.red{
+    color: red;
+}
+.green{
+    color: green;
+}
+
+
+/* =========================================
+   LUDO START SCREEN
+========================================= */
+
+.start-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(circle at top left, rgba(255, 80, 80, .20), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(80, 120, 255, .20), transparent 35%),
+        rgba(10, 10, 20, .96);
+    backdrop-filter: blur(10px);
+}
+
+.start-box {
+    width: 430px;
+    max-width: 90%;
+    padding: 35px;
+    border-radius: 28px;
+    text-align: center;
+    background: rgba(255, 255, 255, .97);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, .45);
+    animation: startBoxShow .5s ease;
+}
+
+.start-logo {
+    font-size: 55px;
+    margin-bottom: 5px;
+}
+
+.start-box h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.start-subtitle {
+    margin: 8px 0 25px;
+    color: #777;
+    font-size: 14px;
+}
+
+.start-box h3 {
+    margin-bottom: 12px;
+}
+
+
+/* PLAYER COUNT */
+
+.player-count {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.player-count-btn {
+    flex: 1;
+    padding: 13px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background: #fff;
+    color: #333;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.player-count-btn:hover {
+    transform: translateY(-2px);
+}
+
+.player-count-btn.active {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+}
+
+
+/* NAME INPUT */
+
+.name-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.name-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 12px;
+    border: 2px solid #e5e5e5;
+    border-radius: 12px;
+    background: #fafafa;
+    transition: .2s;
+}
+
+.name-input:focus-within {
+    border-color: #555;
+    background: #fff;
+}
+
+.name-input span {
+    font-size: 22px;
+}
+
+.name-input input {
+    width: 100%;
+    padding: 10px 5px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.hidden-player {
+    display: none;
+}
+
+
+/* START BUTTON */
+
+.start-game-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    border: none;
+    border-radius: 14px;
+    background: #222;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.start-game-btn:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+}
+
+
+/* ANIMATION */
+
+@keyframes startBoxShow {
+
+    from {
+        opacity: 0;
+        transform: scale(.8) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}

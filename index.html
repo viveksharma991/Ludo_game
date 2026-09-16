@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>🎲 Ludo Master</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/design.css">
+</head>
+
+<body>
+
+    <!-- ================= START SCREEN ================= -->
+
+<div class="start-screen" id="startScreen">
+
+  <div class="start-box">
+
+    <div class="start-logo">🎲</div>
+
+    <h1 style="color: red;">LUDO MASTER</h1>
+    <p class="start-subtitle">Enter player names to start the game</p>
+
+    <!-- PLAYER COUNT -->
+
+    <h3>Choose Players</h3>
+
+    <div class="player-count">
+
+      <button
+        type="button"
+        class="player-count-btn active"
+        id="twoPlayerBtn"
+        onclick="selectPlayerCount(2)">
+        👥 2 Players
+      </button>
+
+      <button
+        type="button"
+        class="player-count-btn"
+        id="fourPlayerBtn"
+        onclick="selectPlayerCount(4)">
+        👥 4 Players
+      </button>
+
+    </div>
+
+
+    <!-- PLAYER NAMES -->
+
+    <div class="name-inputs">
+
+      <!-- PLAYER 1 -->
+
+      <div class="name-input player-red-input">
+        <span>🔴</span>
+        <input
+          type="text"
+          id="playerName1"
+          placeholder="Player 1 Name"
+          maxlength="15"
+          autocomplete="off">
+      </div>
+
+
+      <!-- PLAYER 2 -->
+
+      <div class="name-input player-green-input">
+        <span>🟢</span>
+        <input
+          type="text"
+          id="playerName2"
+          placeholder="Player 2 Name"
+          maxlength="15"
+          autocomplete="off">
+      </div>
+
+
+      <!-- PLAYER 3 -->
+
+      <div
+        class="name-input player-yellow-input hidden-player"
+        id="player3Input">
+
+        <span>🟡</span>
+
+        <input
+          type="text"
+          id="playerName3"
+          placeholder="Player 3 Name"
+          maxlength="15"
+          autocomplete="off">
+
+      </div>
+
+
+      <!-- PLAYER 4 -->
+
+      <div
+        class="name-input player-blue-input hidden-player"
+        id="player4Input">
+
+        <span>🔵</span>
+
+        <input
+          type="text"
+          id="playerName4"
+          placeholder="Player 4 Name"
+          maxlength="15"
+          autocomplete="off">
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="start-game-btn"
+      onclick="startGame()">
+
+      🚀 START GAME
+
+    </button>
+
+  </div>
+
+</div>
+
+  <div class="game-container">
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="game-header">
+
+      <h1>👑 LUDO MASTER</h1>
+
+      
+
+    </header>
+
+
+    <!-- ================= MAIN GAME ================= -->
+
+    <div class="game-layout">
+
+
+      <!-- ========== LEFT SIDE ========== -->
+
+      <aside class="left-panel">
+
+
+       
+        
+<!-- PLAYER 1 -->
+
+<div class="player-card red-player">
+
+  <div class="player-icon">
+    🔴
+  </div>
+
+  <div class="player-info">
+    <h3 id="playerTitle1">Player 1</h3>
+    <span>Red</span>
+  </div>
+
+  <div class="mini-chips">
+
+    <div class="chip-value">
+      <span>●</span>
+      <b id="p1c0">HOME</b>
+    </div>
+
+    <div class="chip-value">
+      <span>●</span>
+      <b id="p1c1">HOME</b>
+    </div>
+
+    <div class="chip-value">
+      <span>●</span>
+      <b id="p1c2">HOME</b>
+    </div>
+
+    <div class="chip-value">
+      <span>●</span>
+      <b id="p1c3">HOME</b>
+    </div>
+
+  </div>
+
+  <div class="player-score">
+    🏆 Score: <b id="p1score">0</b>
+  </div>
+
+</div>
+
+
+        <!-- PLAYER 2 -->
+
+   <div class="player-card green-player">
+
+    <div class="player-icon">🟢</div>
+
+    <div class="player-info">
+        <h3 id="playerTitle2">Player 2</h3>
+        <span>Green</span>
+    </div>
+
+    <div class="mini-chips">
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p2c0">HOME</b>
+        </div>
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p2c1">HOME</b>
+        </div>
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p2c2">HOME</b>
+        </div>
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p2c3">HOME</b>
+        </div>
+
+    </div>
+
+    <div class="player-score">
+        🏆 Score:
+        <b id="p2score">0</b>
+    </div>
+
+</div>
+
+
+      </aside>
+
+
+
+      <!-- ========== CENTER GAME ========== -->
+
+      <main class="center-game">
+
+    <div class="board">
+
+        <!-- ONLY LUDO BOARD -->
+        <div class="ludoBoard" id="ludoBoard"></div>
+
+    </div>
+<div class="board-actions">
+
+    <div class="good-luck">
+        👑 Good Luck!
+    </div>
+
+    <div class="bottom-buttons">
+
+       
+
+        <button class="game-btn">
+            🏠 New Game
+        </button>
+
+    </div>
+
+</div>
+</main>
+
+      <!-- ========== RIGHT SIDE ========== -->
+
+      <aside class="right-panel">
+
+
+        <!-- CURRENT TURN -->
+
+        
+
+
+        <!-- DICE PANEL -->
+
+
+        <!-- PLAYER 3 -->
+
+       <div class="player-card yellow-player">
+
+    <div class="player-icon">🟡</div>
+
+    <div class="player-info">
+        <h3 id="playerTitle3">Player 3</h3>
+        <span>Yellow</span>
+    </div>
+
+    <div class="mini-chips">
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p3c0">HOME</b>
+        </div>
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p3c1">HOME</b>
+        </div>
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p3c2">HOME</b>
+        </div>
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p3c3">HOME</b>
+        </div>
+
+    </div>
+
+    <div class="player-score">
+        🏆 Score:
+        <b id="p3score">0</b>
+    </div>
+
+</div>
+
+
+        <!-- PLAYER 4 -->
+<div class="player-card blue-player">
+
+    <div class="player-icon">🔵</div>
+
+    <div class="player-info">
+        <h3 id="playerTitle4">Player 4</h3>
+        <span>Blue</span>
+    </div>
+
+    <div class="mini-chips">
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p4c0">HOME</b>
+        </div>
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p4c1">HOME</b>
+        </div>
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p4c2">HOME</b>
+        </div>
+
+        <div class="chip-value">
+            <span>●</span>
+            <b id="p4c3">HOME</b>
+        </div>
+
+    </div>
+
+    <div class="player-score">
+        🏆 Score:
+        <b id="p4score">0</b>
+    </div>
+
+</div>
+
+      </aside>
+
+
+      <div>
+         <div class="turn-card">
+
+          <div class="turn-title">
+
+            <span>👑</span>
+
+            <span>CURRENT TURN</span>
+
+          </div>
+
+
+          <div class="current-player">
+
+            <span class="current-player-dot">
+              🔴
+            </span>
+
+            <strong>
+              Player 1
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="dice-card">
+
+    <h2>🎲 Dice</h2>
+
+    <p>Player 1's turn</p>
+
+    <div class="dice-container">
+
+        <div class="dice-player" id="dicebox0"></div>
+
+        <div class="dice-player" id="dicebox1"></div>
+
+        <div class="dice-player" id="dicebox2"></div>
+
+        <div class="dice-player" id="dicebox3"></div>
+
+    </div>
+
+</div>
+      </div>
+
+    </div>
+
+
+
+   
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>
