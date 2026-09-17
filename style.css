@@ -896,3 +896,164 @@ body {
         padding: 15px;
     }
 }
+
+
+.start-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(circle at top left, rgba(255, 80, 80, .20), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(80, 120, 255, .20), transparent 35%),
+        rgba(10, 10, 20, .96);
+    backdrop-filter: blur(10px);
+}
+
+.start-box {
+    width: 430px;
+    max-width: 90%;
+    padding: 35px;
+    border-radius: 28px;
+    text-align: center;
+    background: rgba(255, 255, 255, .97);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, .45);
+    animation: startBoxShow .5s ease;
+}
+
+.start-logo {
+    font-size: 55px;
+    margin-bottom: 5px;
+}
+
+.start-box h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.start-subtitle {
+    margin: 8px 0 25px;
+    color: #777;
+    font-size: 14px;
+}
+
+.start-box h3 {
+    margin-bottom: 12px;
+}
+
+
+/* PLAYER COUNT */
+
+.player-count {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.player-count-btn {
+    flex: 1;
+    padding: 13px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background: #fff;
+    color: #333;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.player-count-btn:hover {
+    transform: translateY(-2px);
+}
+
+.player-count-btn.active {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+}
+
+
+/* NAME INPUT */
+
+.name-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.name-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 12px;
+    border: 2px solid #e5e5e5;
+    border-radius: 12px;
+    background: #fafafa;
+    transition: .2s;
+}
+
+.name-input:focus-within {
+    border-color: #555;
+    background: #fff;
+}
+
+.name-input span {
+    font-size: 22px;
+}
+
+.name-input input {
+    width: 100%;
+    padding: 10px 5px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.hidden-player {
+    display: none;
+}
+
+
+/* START BUTTON */
+
+.start-game-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    border: none;
+    border-radius: 14px;
+    background: #222;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.start-game-btn:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+}
+
+
+/* ANIMATION */
+
+@keyframes startBoxShow {
+
+    from {
+        opacity: 0;
+        transform: scale(.8) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
