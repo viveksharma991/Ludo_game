@@ -1,265 +1,523 @@
+
 :root {
-  --color0: red;
-  --color1: green;
-  --color2: goldenrod;
-  --color3: skyblue;
-  --outline: black;
-  --house: white;
-  --dot: maroon;
-}
-
-@keyframes rotate {
-  0%{
-    transform: rotate(0deg);
-  }
-  100%{
-    transform: rotate(360deg);
-  }
-}
-
-.rotate{
-  animation: rotate infinite 5s linear;
+    --color0: red;
+    --color1: green;
+    --color2: goldenrod;
+    --color3: skyblue;
+    --outline: black;
+    --house: white;
+    --dot: maroon;
 }
 
 * {
-  margin: 0px;
-  padding: 0px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, #263b78, transparent 35%),
+        radial-gradient(circle at bottom right, #54245f, transparent 35%),
+        #080d20;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
 }
 
-.board {
-  height: 380px;
-  width: 380px;
-  outline: 1px solid var(--outline);
+/* =========================
+   MAIN CONTAINER
+   ========================= */
 
-  display: grid;
-  grid-template-rows: 40px 300px 40px;
-  grid-template-columns: 40px 300px 40px;
+.game-container {
+    width: min(1500px, 96%);
+    margin: 0 auto;
+    padding: 25px 0 35px;
+}
 
-  .dicebox {
-    background-color: var(--color0);
-    display:flex;
+/* =========================
+   HEADER
+   ========================= */
+
+.game-header {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.game-header h1 {
+    font-size: 42px;
+    margin: 0;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px rgba(255,255,255,.3);
+}
+
+/* =========================
+   4 COLUMN MAIN LAYOUT
+   LEFT | BOARD | RIGHT | INFO
+   ========================= */
+
+.game-layout {
+    display: grid;
+    grid-template-columns:
+        minmax(160px, 210px)
+        minmax(420px, 1fr)
+        minmax(160px, 210px)
+        minmax(180px, 220px);
+
     justify-content: center;
     align-items: center;
-  }
+    gap: 18px;
+    width: 100%;
+}
 
-  .dicebox0 {
-    grid-row: 1/2;
-    grid-column: 1/2;
-  }
+/* =========================
+   PLAYER PANELS
+   ========================= */
 
-  .dicebox1 {
-    grid-row: 1/2;
-    grid-column: 3/4;
-  }
+.left-panel,
+.right-panel {
+    width: 100%;
+}
 
-  .dicebox2 {
-    grid-row: 3/4;
-    grid-column: 3/4;
-  }
+.player-card {
+    width: 100%;
+    padding: 15px;
+    margin: 12px 0;
+    border-radius: 18px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.15);
+    box-shadow: 0 10px 25px rgba(0,0,0,.3);
+    transition: .3s;
+}
 
-  .dicebox3 {
-    grid-row: 3/4;
-    grid-column: 1/2;
-  }
+.player-card:hover {
+    transform: translateY(-3px);
+}
 
-  .ludoBoard {
-    height: 300px;
-    width: 300px;
-    outline: 1px solid var(--outline);
+.player-card h3 {
+    margin: 5px 0;
+    font-size: 19px;
+}
 
-    grid-row: 2/3;
-    grid-column: 2/3;
+.player-card span {
+    font-size: 14px;
+}
 
+.player-icon {
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+.mini-chips {
+    margin-top: 10px;
+    font-size: 17px;
+    letter-spacing: 4px;
+}
+
+.red-player {
+    border-color: #ff3150;
+}
+
+.green-player {
+    border-color: #27d95f;
+}
+
+.yellow-player {
+    border-color: #ffc400;
+}
+
+.blue-player {
+    border-color: #2196ff;
+}
+
+/* =========================
+   CENTER GAME
+   ========================= */
+
+.center-game {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+   Current HTML uses .board, not .board-wrapper.
+   Keep the board wrapper around 430px so it does not
+   push the other columns outside the viewport.
+*/
+
+.board {
+    position: relative;
+    width: 436px;
+    height: 436px;
+    padding: 18px;
+    margin: 0 auto;
+    border-radius: 25px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.15);
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5),
+        inset 0 0 30px rgba(255,255,255,.04);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ludoBoard {
+    width: 400px !important;
+    height: 400px !important;
+    flex-shrink: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(255,255,255,.15);
+}
+
+/* =========================
+   BOARD ACTIONS
+   ========================= */
+
+.board-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.good-luck {
+    margin: 0;
+    min-width: 160px;
+    padding: 12px 18px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid #3879ff;
+    font-size: 17px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.bottom-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.bottom-buttons button,
+.game-btn {
+    min-width: 145px;
+    padding: 12px 18px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.08);
+    color: white;
+    border: 1px solid rgba(255,255,255,.2);
+    cursor: pointer;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.bottom-buttons button:hover,
+.game-btn:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,.15);
+}
+
+/* =========================
+   TURN CARD
+   ========================= */
+
+.turn-card {
+    width: 100%;
+    padding: 18px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid #ffbd4a;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.turn-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffc857;
+}
+
+.current-player {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+.current-player-dot {
+    font-size: 19px;
+}
+
+/* =========================
+   DICE CARD
+   ========================= */
+
+.dice-card {
+    width: 100%;
+    margin: 15px 0;
+    padding: 18px;
+    text-align: center;
+    border-radius: 20px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid #5c9dff;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.dice-card h2 {
+    margin: 0 0 7px;
+    font-size: 21px;
+}
+
+.dice-card p {
+    margin-bottom: 10px;
+    color: #c9d4ff;
+    font-size: 13px;
+}
+
+.dice-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.dice-player {
+    width: 100%;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+}
+
+.dice-player.active-dice {
+    border-color: #ffc857;
+    box-shadow: 0 0 15px rgba(255,200,87,.35);
+}
+
+/* =========================
+   ORIGINAL LUDO BOARD ENGINE
+   ========================= */
+
+.rotate {
+    animation: rotate infinite 5s linear;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Board grid */
+
+.ludoBoard {
     display: grid;
     grid-template-rows: repeat(15, 1fr);
     grid-template-columns: repeat(15, 1fr);
-
-    .chip {
-      height: 12px;
-      width: 12px;
-
-      box-shadow: 0px 0px 5px 1px black;
-      outline: 1px solid var(--outline);
-
-      border-radius: 50%;
-      border:2px dashed white
-    }
-
-    .p0s0 {
-      grid-row: 7/8;
-      grid-column: 2/3;
-    }
-    .p0s1 {
-      grid-row: 3/4;
-      grid-column: 7/8;
-    }
-    .p1s0 {
-      grid-row: 2/3;
-      grid-column: 9/10;
-    }
-    .p1s1 {
-      grid-row: 7/8;
-      grid-column: 13/14;
-    }
-    .p2s0 {
-      grid-row: 9/10;
-      grid-column: 14/15;
-    }
-    .p2s1 {
-      grid-row: 13/14;
-      grid-column: 9/10;
-    }
-    .p3s0 {
-      grid-row: 14/15;
-      grid-column: 7/8;
-    }
-    .p3s1 {
-      grid-row: 9/10;
-      grid-column: 3/4;
-    }
-
-    .box {
-      outline: 1px solid var(--outline);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .carpet {
-      outline: 1px solid var(--outline);
-
-      display: grid;
-    }
-
-    .carpet0 {
-      grid-row: 8/9;
-      grid-column: 2/7;
-
-      grid-template-rows: 1fr;
-      grid-template-columns: repeat(5, 1fr);
-    }
-
-    .carpet1 {
-      grid-row: 2/7;
-      grid-column: 8/9;
-
-      grid-template-rows: repeat(5, 1fr);
-      grid-template-columns: 1fr;
-    }
-
-    .carpet2 {
-      grid-row: 8/9;
-      grid-column: 10/15;
-
-      grid-template-rows: 1fr;
-      grid-template-columns: repeat(5, 1fr);
-    }
-
-    .carpet3 {
-      grid-row: 10/15;
-      grid-column: 8/9;
-
-      grid-template-rows: repeat(5, 1fr);
-      grid-template-columns: 1fr;
-    }
-
-    .winningBox {
-      grid-row: 7/10;
-      grid-column: 7/10;
-      outline: 1px solid var(--outline);
-      border-top: 30px solid var(--color1);
-      border-right: 30px solid var(--color2);
-      border-left: 30px solid var(--color0);
-      border-bottom: 30px solid var(--color3);
-    }
-
-    .city {
-      outline: 1px solid var(--outline);
-
-      display: grid;
-      grid-template-rows: repeat(6, 1fr);
-      grid-template-columns: repeat(6, 1fr);
-
-      .house {
-        outline: 1px solid var(--outline);
-        grid-row: 2/6;
-        grid-column: 2/6;
-
-        background-color: var(--house);
-
-        display: grid;
-        grid-template-rows: 1fr 2fr 1fr 2fr 1fr;
-        grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
-
-        .room {
-          outline: 1px solid var(--outline);
-
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .room0 {
-          grid-row: 2/3;
-          grid-column: 2/3;
-        }
-
-        .room1 {
-          grid-row: 2/3;
-          grid-column: 4/5;
-        }
-
-        .room2 {
-          grid-row: 4/5;
-          grid-column: 4/5;
-        }
-
-        .room3 {
-          grid-row: 4/5;
-          grid-column: 2/3;
-        }
-      }
-    }
-
-    .city0 {
-      grid-row: 1/7;
-      grid-column: 1/7;
-    }
-
-    .city1 {
-      grid-row: 1/7;
-      grid-column: 10/16;
-    }
-
-    .city2 {
-      grid-row: 10/16;
-      grid-column: 10/16;
-    }
-
-    .city3 {
-      grid-row: 10/16;
-      grid-column: 1/7;
-    }
-  }
 }
+
+/* Board cells */
 
 .box {
     position: relative;
+    outline: 1px solid var(--outline);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.carpet {
+    outline: 1px solid var(--outline);
+    display: grid;
+}
+
+/* Home areas */
+
+.city {
+    outline: 1px solid var(--outline);
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.house {
+    outline: 1px solid var(--outline);
+    grid-row: 2/6;
+    grid-column: 2/6;
+    background-color: var(--house);
+
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
+}
+
+.room {
+    outline: 1px solid var(--outline);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Board positioning */
+
+.p0s0 {
+    grid-row: 7/8;
+    grid-column: 2/3;
+}
+
+.p0s1 {
+    grid-row: 3/4;
+    grid-column: 7/8;
+}
+
+.p1s0 {
+    grid-row: 2/3;
+    grid-column: 9/10;
+}
+
+.p1s1 {
+    grid-row: 7/8;
+    grid-column: 13/14;
+}
+
+.p2s0 {
+    grid-row: 9/10;
+    grid-column: 14/15;
+}
+
+.p2s1 {
+    grid-row: 13/14;
+    grid-column: 9/10;
+}
+
+.p3s0 {
+    grid-row: 14/15;
+    grid-column: 7/8;
+}
+
+.p3s1 {
+    grid-row: 9/10;
+    grid-column: 3/4;
+}
+
+.carpet0 {
+    grid-row: 8/9;
+    grid-column: 2/7;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.carpet1 {
+    grid-row: 2/7;
+    grid-column: 8/9;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 1fr;
+}
+
+.carpet2 {
+    grid-row: 8/9;
+    grid-column: 10/15;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.carpet3 {
+    grid-row: 10/15;
+    grid-column: 8/9;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 1fr;
+}
+
+.winningBox {
+    grid-row: 7/10;
+    grid-column: 7/10;
+    outline: 1px solid var(--outline);
+    border-top: 30px solid var(--color1);
+    border-right: 30px solid var(--color2);
+    border-left: 30px solid var(--color0);
+    border-bottom: 30px solid var(--color3);
+}
+
+.city0 {
+    grid-row: 1/7;
+    grid-column: 1/7;
+}
+
+.city1 {
+    grid-row: 1/7;
+    grid-column: 10/16;
+}
+
+.city2 {
+    grid-row: 10/16;
+    grid-column: 10/16;
+}
+
+.city3 {
+    grid-row: 10/16;
+    grid-column: 1/7;
+}
+
+.room0 {
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+
+.room1 {
+    grid-row: 2/3;
+    grid-column: 4/5;
+}
+
+.room2 {
+    grid-row: 4/5;
+    grid-column: 4/5;
+}
+
+.room3 {
+    grid-row: 4/5;
+    grid-column: 2/3;
+}
+
+/* =========================
+   CHIPS
+   ========================= */
 
 .chip {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 12px;
+    height: 12px;
     box-sizing: border-box;
+    border-radius: 50%;
+    border: 2px dashed white;
+    box-shadow: 0 0 5px 1px black;
 }
 
 .top-chip {
@@ -267,387 +525,374 @@ body {
 }
 
 .color0 {
-  background-color: var(--color0);
+    background-color: var(--color0);
 }
 
 .color1 {
-  background-color: var(--color1);
+    background-color: var(--color1);
 }
 
 .color2 {
-  background-color: var(--color2);
+    background-color: var(--color2);
 }
 
 .color3 {
-  background-color: var(--color3);
+    background-color: var(--color3);
 }
 
-.dice {
-  height: 30px;
-  width: 30px;
-  outline: 1px solid var(--outline);
-  display: grid;
-  background-color: var(--house);
+/* =========================
+   DICE
+   ========================= */
 
-  .dot {
+.dice {
+    height: 30px;
+    width: 30px;
+    outline: 1px solid var(--outline);
+    display: grid;
+    background-color: var(--house);
+    cursor: pointer;
+}
+
+.dot {
     background-color: var(--dot);
     border-radius: 50%;
-  }
 }
 
 .dice0 {
-  grid-template-rows: 12px 6px 12px;
-  grid-template-columns: 12px 6px 12px;
+    grid-template-rows: 12px 6px 12px;
+    grid-template-columns: 12px 6px 12px;
+}
 
-  .dot0 {
+.dice0 .dot0 {
     grid-row: 2/3;
     grid-column: 2/3;
-  }
 }
 
 .dice1 {
-  grid-template-rows: 6px 6px 6px 6px 6px;
-  grid-template-columns: 6px 6px 6px 6px 6px;
+    grid-template-rows: 6px 6px 6px 6px 6px;
+    grid-template-columns: 6px 6px 6px 6px 6px;
+}
 
-  .dot0 {
+.dice1 .dot0 {
     grid-row: 2/3;
     grid-column: 2/3;
-  }
+}
 
-  .dot1 {
+.dice1 .dot1 {
     grid-row: 4/5;
     grid-column: 4/5;
-  }
 }
 
 .dice2 {
-  grid-template-rows: 3px 6px 3px 6px 3px 6px 3px;
-  grid-template-columns: 3px 6px 3px 6px 3px 6px 3px;
+    grid-template-rows: 3px 6px 3px 6px 3px 6px 3px;
+    grid-template-columns: 3px 6px 3px 6px 3px 6px 3px;
+}
 
-  .dot0 {
+.dice2 .dot0 {
     grid-row: 2/3;
     grid-column: 2/3;
-  }
+}
 
-  .dot1 {
+.dice2 .dot1 {
     grid-row: 4/5;
     grid-column: 4/5;
-  }
+}
 
-  .dot2 {
+.dice2 .dot2 {
     grid-row: 6/7;
     grid-column: 6/7;
-  }
 }
 
 .dice3 {
-  grid-template-rows: 6px 6px 6px 6px 6px;
-  grid-template-columns: 6px 6px 6px 6px 6px;
+    grid-template-rows: 6px 6px 6px 6px 6px;
+    grid-template-columns: 6px 6px 6px 6px 6px;
+}
 
-  .dot0 {
+.dice3 .dot0 {
     grid-row: 2/3;
     grid-column: 2/3;
-  }
+}
 
-  .dot1 {
+.dice3 .dot1 {
     grid-row: 4/5;
     grid-column: 4/5;
-  }
+}
 
-  .dot2 {
+.dice3 .dot2 {
     grid-row: 2/3;
     grid-column: 4/5;
-  }
+}
 
-  .dot3 {
+.dice3 .dot3 {
     grid-row: 4/5;
     grid-column: 2/3;
-  }
 }
 
 .dice4 {
-  grid-template-rows: 3px 6px 3px 6px 3px 6px 3px;
-  grid-template-columns: 3px 6px 3px 6px 3px 6px 3px;
+    grid-template-rows: 3px 6px 3px 6px 3px 6px 3px;
+    grid-template-columns: 3px 6px 3px 6px 3px 6px 3px;
+}
 
-  .dot0 {
+.dice4 .dot0 {
     grid-row: 2/3;
     grid-column: 2/3;
-  }
+}
 
-  .dot1 {
+.dice4 .dot1 {
     grid-row: 4/5;
     grid-column: 4/5;
-  }
+}
 
-  .dot2 {
+.dice4 .dot2 {
     grid-row: 6/7;
     grid-column: 6/7;
-  }
+}
 
-  .dot3 {
+.dice4 .dot3 {
     grid-row: 2/3;
     grid-column: 6/7;
-  }
+}
 
-  .dot4 {
+.dice4 .dot4 {
     grid-row: 6/7;
     grid-column: 2/3;
-  }
 }
 
 .dice5 {
-  grid-template-rows: 3px 6px 3px 6px 3px 6px 3px;
-  grid-template-columns: 6px 6px 6px 6px 6px;
-
-  .dot0 {
-    grid-row: 2/3;
-    grid-column: 2/3;
-  }
-
-  .dot1 {
-    grid-row: 4/5;
-    grid-column: 2/3;
-  }
-
-  .dot2 {
-    grid-row: 6/7;
-    grid-column: 2/3;
-  }
-
-  .dot3 {
-    grid-row: 2/3;
-    grid-column: 4/5;
-  }
-
-  .dot4 {
-    grid-row: 4/5;
-    grid-column: 4/5;
-  }
-
-  .dot5 {
-    grid-row: 6/7;
-    grid-column: 4/5;
-  }
+    grid-template-rows: 3px 6px 3px 6px 3px 6px 3px;
+    grid-template-columns: 6px 6px 6px 6px 6px;
 }
 
+.dice5 .dot0 {
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+
+.dice5 .dot1 {
+    grid-row: 4/5;
+    grid-column: 2/3;
+}
+
+.dice5 .dot2 {
+    grid-row: 6/7;
+    grid-column: 2/3;
+}
+
+.dice5 .dot3 {
+    grid-row: 2/3;
+    grid-column: 4/5;
+}
+
+.dice5 .dot4 {
+    grid-row: 4/5;
+    grid-column: 4/5;
+}
+
+.dice5 .dot5 {
+    grid-row: 6/7;
+    grid-column: 4/5;
+}
 
 .roll-btn:disabled {
-    opacity: 0.5;
+    opacity: .5;
     cursor: not-allowed;
     transform: none;
 }
 
-/* =================================
-   MODERN SVG LUDO CHIPS
-================================= */
+/* =========================
+   START SCREEN
+   ========================= */
 
-/* =================================
-   FIXED SVG LUDO CHIP
-================================= */
-
-.box,
-.room,
-.winningBox {
-    position: relative !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-}
-
-.chip {
-    width: 28px !important;
-    height: 28px !important;
-
-    position: absolute !important;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    box-sizing: border-box !important;
-
-    background: transparent !important;
-
-    cursor: pointer;
-    z-index: 5;
-
-    flex-shrink: 0 !important;
-}
-
-.chip-svg {
-    width: 100% !important;
-    height: 100% !important;
-
-    display: block;
-    overflow: visible;
-
-    flex-shrink: 0;
-
-    filter:
-        drop-shadow(0 2px 3px rgba(0,0,0,.5))
-        drop-shadow(0 0 5px currentColor);
-
-    transition:
-        transform .2s ease,
-        filter .2s ease;
-}
-
-/* Player colors */
-
-.chip.color0 {
-    color: #ff2020 !important;
-}
-
-.chip.color1 {
-    color: #16c932 !important;
-}
-
-.chip.color2 {
-    color: #ffd21c !important;
-}
-
-.chip.color3 {
-    color: #1599ff !important;
-}
-
-
-/* Active / movable chip */
-
-.chip.rotate {
-    cursor: pointer;
-}
-
-.chip.rotate .chip-svg {
-    animation: chipPulse 1s infinite;
-}
-
-.chip.rotate:hover .chip-svg {
-    transform: scale(1.15);
-    filter:
-        drop-shadow(0 3px 4px rgba(0,0,0,.5))
-        drop-shadow(0 0 8px currentColor);
-}
-
-
-/* Opponent ke upar wali chip */
-
-.chip.top-chip {
-    z-index: 100 !important;
-}
-
-
-/* Animation */
-
-@keyframes chipPulse {
-
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.12);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-
-}
-
-
-.game-over-overlay {
+.start-screen {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-    backdrop-filter: blur(8px);
+    z-index: 9999;
 }
 
-.game-over-popup {
-    width: 420px;
-    padding: 30px;
-    border-radius: 24px;
-    background: #ffffff;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    animation: popupShow 0.4s ease;
+/* Keep any existing start-screen styles from the other CSS
+   working; these values only provide safe positioning. */
+
+.start-screen[style*="display: none"] {
+    pointer-events: none;
 }
 
-.game-over-popup h1 {
-    margin-bottom: 25px;
-    font-size: 32px;
-}
+/* =========================
+   RESPONSIVE
+   ========================= */
 
-.winner,
-.rank {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 18px;
-    margin: 10px 0;
-    border-radius: 12px;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.winner {
-    background: #fff3cd;
-    font-size: 21px;
-}
-
-.winner span {
-    color: #d89b00;
-}
-
-.second {
-    background: #eeeeee;
-    color: #000;
-}
-
-.third {
-    background: #f5e0cf;
-    color: #000;
-}
-
-.loser {
-    background: #f5f5f5;
-    color: #000;
-}
-
-.play-again-btn {
-    margin-top: 20px;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 12px;
-    background: #222;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.play-again-btn:hover {
-    transform: scale(1.05);
-}
-
-@keyframes popupShow {
-    from {
-        opacity: 0;
-        transform: scale(0.7);
+/* Medium desktop / laptop */
+@media (max-width: 1250px) {
+    .game-layout {
+        grid-template-columns:
+            170px
+            minmax(390px, 1fr)
+            170px
+            180px;
+        gap: 12px;
     }
 
-    to {
-        opacity: 1;
-        transform: scale(1);
+    .board {
+        width: 416px;
+        height: 416px;
+        padding: 8px;
+    }
+
+    .ludoBoard {
+        width: 400px !important;
+        height: 400px !important;
+    }
+
+    .player-card {
+        padding: 12px;
+    }
+
+    .player-card h3 {
+        font-size: 17px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1050px) {
+    .game-layout {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+
+    .center-game {
+        grid-column: 1 / 3;
+        grid-row: 1;
+        order: 1;
+    }
+
+    .left-panel {
+        grid-column: 1;
+        grid-row: 2;
+        order: 2;
+    }
+
+    .right-panel {
+        grid-column: 2;
+        grid-row: 2;
+        order: 3;
+    }
+
+    .game-layout > div:last-child {
+        grid-column: 1 / 3;
+        grid-row: 3;
+        order: 4;
+        width: min(440px, 100%);
+        margin: 0 auto;
+    }
+
+    .left-panel,
+    .right-panel {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .player-card {
+        width: 200px;
+        margin: 5px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+    .game-container {
+        width: 94%;
+        padding-top: 15px;
+    }
+
+    .game-header {
+        margin-bottom: 15px;
+    }
+
+    .game-header h1 {
+        font-size: 28px;
+        letter-spacing: 2px;
+    }
+
+    .game-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .center-game {
+        width: 100%;
+        order: 1;
+    }
+
+    .left-panel {
+        order: 2;
+        width: 100%;
+    }
+
+    .right-panel {
+        order: 3;
+        width: 100%;
+    }
+
+    .game-layout > div:last-child {
+        order: 4;
+        width: 100%;
+    }
+
+    .board {
+        width: min(94vw, 420px);
+        height: min(94vw, 420px);
+        padding: 7px;
+        border-radius: 18px;
+    }
+
+    .ludoBoard {
+        width: min(90vw, 400px) !important;
+        height: min(90vw, 400px) !important;
+    }
+
+    .board-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .good-luck,
+    .bottom-buttons,
+    .game-btn {
+        width: 100%;
+    }
+
+    .player-card {
+        width: min(100%, 260px);
+    }
+
+    .left-panel,
+    .right-panel {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 430px) {
+    .game-header h1 {
+        font-size: 24px;
+    }
+
+    .board {
+        width: 94vw;
+        height: 94vw;
+        padding: 5px;
+    }
+
+    .ludoBoard {
+        width: 90vw !important;
+        height: 90vw !important;
+    }
+
+    .dice-card,
+    .turn-card {
+        padding: 15px;
     }
 }
