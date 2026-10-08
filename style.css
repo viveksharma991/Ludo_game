@@ -699,204 +699,198 @@ body {
     transform: none;
 }
 
-/* =========================
-   START SCREEN
-   ========================= */
 
-.start-screen {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
+/* =========================================
+   PLAYER VALUE / SCORE DETAILS
+========================================= */
+
+.player-card {
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
-/* Keep any existing start-screen styles from the other CSS
-   working; these values only provide safe positioning. */
-
-.start-screen[style*="display: none"] {
-    pointer-events: none;
+.mini-chips {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+    letter-spacing: normal;
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
-
-/* Medium desktop / laptop */
-@media (max-width: 1250px) {
-    .game-layout {
-        grid-template-columns:
-            170px
-            minmax(390px, 1fr)
-            170px
-            180px;
-        gap: 12px;
-    }
-
-    .board {
-        width: 416px;
-        height: 416px;
-        padding: 8px;
-    }
-
-    .ludoBoard {
-        width: 400px !important;
-        height: 400px !important;
-    }
-
-    .player-card {
-        padding: 12px;
-    }
-
-    .player-card h3 {
-        font-size: 17px;
-    }
+.chip-value {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 9px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 13px;
+    transition: 0.2s ease;
 }
 
-/* Tablet */
-@media (max-width: 1050px) {
-    .game-layout {
-        grid-template-columns: 1fr 1fr;
-        align-items: start;
-    }
-
-    .center-game {
-        grid-column: 1 / 3;
-        grid-row: 1;
-        order: 1;
-    }
-
-    .left-panel {
-        grid-column: 1;
-        grid-row: 2;
-        order: 2;
-    }
-
-    .right-panel {
-        grid-column: 2;
-        grid-row: 2;
-        order: 3;
-    }
-
-    .game-layout > div:last-child {
-        grid-column: 1 / 3;
-        grid-row: 3;
-        order: 4;
-        width: min(440px, 100%);
-        margin: 0 auto;
-    }
-
-    .left-panel,
-    .right-panel {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .player-card {
-        width: 200px;
-        margin: 5px;
-    }
+.chip-value:hover {
+    background: rgba(255,255,255,0.12);
+    transform: translateX(2px);
 }
 
-/* Mobile */
-@media (max-width: 650px) {
-    .game-container {
-        width: 94%;
-        padding-top: 15px;
-    }
-
-    .game-header {
-        margin-bottom: 15px;
-    }
-
-    .game-header h1 {
-        font-size: 28px;
-        letter-spacing: 2px;
-    }
-
-    .game-layout {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .center-game {
-        width: 100%;
-        order: 1;
-    }
-
-    .left-panel {
-        order: 2;
-        width: 100%;
-    }
-
-    .right-panel {
-        order: 3;
-        width: 100%;
-    }
-
-    .game-layout > div:last-child {
-        order: 4;
-        width: 100%;
-    }
-
-    .board {
-        width: min(94vw, 420px);
-        height: min(94vw, 420px);
-        padding: 7px;
-        border-radius: 18px;
-    }
-
-    .ludoBoard {
-        width: min(90vw, 400px) !important;
-        height: min(90vw, 400px) !important;
-    }
-
-    .board-actions {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .good-luck,
-    .bottom-buttons,
-    .game-btn {
-        width: 100%;
-    }
-
-    .player-card {
-        width: min(100%, 260px);
-    }
-
-    .left-panel,
-    .right-panel {
-        flex-direction: column;
-        align-items: center;
-    }
+.chip-value > span {
+    font-size: 18px;
+    line-height: 1;
 }
 
-/* Small mobile */
-@media (max-width: 430px) {
-    .game-header h1 {
-        font-size: 24px;
-    }
-
-    .board {
-        width: 94vw;
-        height: 94vw;
-        padding: 5px;
-    }
-
-    .ludoBoard {
-        width: 90vw !important;
-        height: 90vw !important;
-    }
-
-    .dice-card,
-    .turn-card {
-        padding: 15px;
-    }
+.chip-value b {
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    min-width: 48px;
+    text-align: right;
 }
 
+.player-score {
+    margin-top: 13px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 14px;
+    color: #bfc8e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player-score b {
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.red-player .chip-value > span { color: #ff3150; }
+.green-player .chip-value > span { color: #27d95f; }
+.yellow-player .chip-value > span { color: #ffc400; }
+.blue-player .chip-value > span { color: #2196ff; }
+
+.chip-value.active {
+    border-color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.10);
+}
+
+.chip-value.finished b {
+    color: #6dff9b;
+}
+
+.chip-value.home b {
+    color: #aeb8df;
+}
+
+
+/* Optional roll button / result styles */
+.roll-btn {
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffb300, #ff7a00);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .25s;
+    box-shadow: 0 8px 20px rgba(255, 140, 0, .25);
+}
+
+.roll-btn:hover { transform: translateY(-3px); }
+.roll-btn:active { transform: scale(.96); }
+
+.dice-result {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: rgba(255,255,255,.1);
+    font-size: 38px;
+}
+
+.red { color: red; }
+.green { color: green; }
+
+
+/* =========================================
+   MODERN SVG LUDO CHIPS
+========================================= */
+
+.box,
+.room,
+.winningBox {
+    position: relative !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+}
+
+.chip {
+    width: 28px !important;
+    height: 28px !important;
+    position: absolute !important;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    background: transparent !important;
+    cursor: pointer;
+    z-index: 5;
+    flex-shrink: 0 !important;
+}
+
+.chip-svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    overflow: visible;
+    flex-shrink: 0;
+    filter:
+        drop-shadow(0 2px 3px rgba(0,0,0,.5))
+        drop-shadow(0 0 5px currentColor);
+    transition: transform .2s ease, filter .2s ease;
+}
+
+.chip.color0 { color: #ff2020 !important; }
+.chip.color1 { color: #16c932 !important; }
+.chip.color2 { color: #ffd21c !important; }
+.chip.color3 { color: #1599ff !important; }
+
+.chip.rotate { cursor: pointer; }
+
+.chip.rotate .chip-svg {
+    animation: chipPulse 1s infinite;
+}
+
+.chip.rotate:hover .chip-svg {
+    transform: scale(1.15);
+    filter:
+        drop-shadow(0 3px 4px rgba(0,0,0,.5))
+        drop-shadow(0 0 8px currentColor);
+}
+
+.chip.top-chip {
+    z-index: 100 !important;
+}
+
+@keyframes chipPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
 
 .start-screen {
     position: fixed;
@@ -1058,195 +1052,375 @@ body {
 
 }
 
+
 /* =========================================
-   MOBILE RESPONSIVE LUDO
+   LEGACY SELECTOR COMPATIBILITY
+   (kept from the original design CSS)
 ========================================= */
 
-* {
-    box-sizing: border-box;
+.game-header p {
+    margin-top: 5px;
+    color: #aeb8df;
+    font-size: 18px;
 }
 
-html,
-body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
+.turn-card small {
+    color: #ffc857;
 }
 
-body {
-    min-height: 100dvh;
-    height: auto;
+.turn-card h2 {
+    margin: 10px 0 0;
 }
 
-/* Main container */
-.game-container {
-    width: 100%;
-    max-width: 1400px;
-    padding: 15px 10px 30px;
-}
-
-/* Header */
-.game-header {
-    margin-bottom: 15px;
-}
-
-.game-header h1 {
-    font-size: clamp(24px, 7vw, 42px);
-    letter-spacing: 1px;
-}
-
-/* Main layout */
-.game-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-    width: 100%;
-}
-
-/* Center game */
-.center-game {
-    width: 100%;
-    order: 1;
-}
-
-/* Board outer box */
-.center-game .board {
-    width: min(96vw, 600px) !important;
-    height: min(96vw, 600px) !important;
-    padding: 8px;
-    margin: 0 auto;
-}
-
-/* Actual Ludo board */
-.center-game .ludoBoard {
-    width: min(90vw, 570px) !important;
-    height: min(90vw, 570px) !important;
-    max-width: none;
-    max-height: none;
-}
-
-/* Bottom buttons */
-.board-actions {
-    width: 100%;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 12px;
-}
-
-.good-luck {
-    width: min(90vw, 300px);
-    min-width: 0;
-    text-align: center;
-    padding: 12px 20px;
-    font-size: 16px;
-}
-
-.bottom-buttons {
-    width: min(90vw, 300px);
-}
-
-.game-btn {
-    width: 100%;
-    min-width: 0;
-}
-
-/* Player panels */
-.left-panel,
-.right-panel {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-}
-
-/* Player card */
-.player-card {
-    width: 100%;
-    margin: 0;
-    padding: 12px;
-    border-radius: 14px;
-}
-
-.player-icon {
-    font-size: 28px;
-}
-
-.player-card h3 {
-    font-size: 16px;
-}
-
-.player-card span {
-    font-size: 12px;
-}
-
-.chip-value {
-    font-size: 12px;
-    padding: 5px 7px;
-}
-
-.chip-value > span {
+.bottom-buttons button {
+    min-width: 145px;
+    padding: 12px 18px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.08);
+    color: white;
+    border: 1px solid rgba(255,255,255,.2);
+    cursor: pointer;
     font-size: 15px;
+    transition: .3s;
 }
 
-.chip-value b {
-    font-size: 10px;
-    min-width: 40px;
+.bottom-buttons button:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,.15);
 }
 
-.player-score {
-    font-size: 12px;
+.center-game .board {
+    width: 436px;
+    height: 436px;
 }
 
-/* Dice */
-.dice-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+.center-game .ludoBoard {
+    width: 400px !important;
+    height: 400px !important;
 }
 
-.dice-player {
-    width: 55px;
-    height: 55px;
-    margin: auto;
+.dice-player .dice {
+    cursor: pointer;
 }
 
-/* Current turn / dice cards */
-.turn-card,
-.dice-card {
-    width: 100%;
+/* =========================================
+   GAME OVER POPUP
+========================================= */
+
+.game-over-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    backdrop-filter: blur(8px);
     padding: 15px;
 }
 
-/* Start screen */
-.start-screen {
-    padding: 15px;
+.game-over-popup {
+    width: 420px;
+    max-width: 100%;
+    padding: 30px;
+    border-radius: 24px;
+    background: #ffffff;
+    color: #111;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    animation: popupShow 0.4s ease;
 }
 
-.start-box {
-    width: 100%;
-    max-width: 420px;
-    padding: 25px 18px;
+.game-over-popup h1 {
+    margin-bottom: 25px;
+    font-size: 32px;
 }
 
-.start-box h1 {
-    font-size: 26px;
+.winner,
+.rank {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    margin: 10px 0;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
 }
 
-.player-count {
-    gap: 8px;
+.winner {
+    background: #fff3cd;
+    font-size: 21px;
 }
 
-.player-count-btn {
-    padding: 11px 8px;
-    font-size: 14px;
+.winner span { color: #d89b00; }
+.second { background: #eeeeee; color: #000; }
+.third { background: #f5e0cf; color: #000; }
+.loser { background: #f5f5f5; color: #000; }
+
+.play-again-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    background: #222;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.play-again-btn:hover {
+    transform: scale(1.05);
+}
+
+@keyframes popupShow {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 
 /* =========================================
-   SMALL MOBILE
+   RESPONSIVE
 ========================================= */
 
-@media (max-width: 480px) {
+/* Medium desktop / laptop */
+@media (max-width: 1250px) {
+    .game-layout {
+        grid-template-columns: 170px minmax(390px, 1fr) 170px 180px;
+        gap: 12px;
+    }
 
+    .board {
+        width: 416px;
+        height: 416px;
+        padding: 8px;
+    }
+
+    .ludoBoard {
+        width: 400px !important;
+        height: 400px !important;
+    }
+
+    .player-card {
+        padding: 12px;
+    }
+
+    .player-card h3 {
+        font-size: 17px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1050px) {
+    .game-layout {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+
+    .center-game {
+        grid-column: 1 / 3;
+        grid-row: 1;
+        order: 1;
+    }
+
+    .left-panel {
+        grid-column: 1;
+        grid-row: 2;
+        order: 2;
+    }
+
+    .right-panel {
+        grid-column: 2;
+        grid-row: 2;
+        order: 3;
+    }
+
+    .game-layout > div:last-child {
+        grid-column: 1 / 3;
+        grid-row: 3;
+        order: 4;
+        width: min(440px, 100%);
+        margin: 0 auto;
+    }
+
+    .left-panel,
+    .right-panel {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .player-card {
+        width: 200px;
+        margin: 5px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+    .game-container {
+        width: 100%;
+        padding: 15px 8px 30px;
+    }
+
+    .game-header {
+        margin-bottom: 15px;
+    }
+
+    .game-header h1 {
+        font-size: clamp(24px, 7vw, 28px);
+        letter-spacing: 1px;
+    }
+
+    .game-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .center-game,
+    .left-panel,
+    .right-panel,
+    .game-layout > div:last-child {
+        width: 100%;
+    }
+
+    .center-game { order: 1; }
+    .left-panel { order: 2; }
+    .right-panel { order: 3; }
+    .game-layout > div:last-child { order: 4; }
+
+    .board {
+        width: min(96vw, 600px) !important;
+        height: min(96vw, 600px) !important;
+        padding: 6px;
+        border-radius: 16px;
+    }
+
+    .ludoBoard {
+        width: min(92vw, 570px) !important;
+        height: min(92vw, 570px) !important;
+    }
+
+    .board-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .good-luck,
+    .bottom-buttons,
+    .game-btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .good-luck {
+        padding: 12px 15px;
+        font-size: 16px;
+    }
+
+    .left-panel,
+    .right-panel {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .player-card {
+        width: 100%;
+        margin: 0;
+        padding: 10px;
+        border-radius: 14px;
+    }
+
+    .player-icon { font-size: 26px; }
+    .player-card h3 { font-size: 15px; }
+    .player-card span { font-size: 11px; }
+
+    .mini-chips {
+        margin-top: 9px;
+        gap: 5px;
+    }
+
+    .chip-value {
+        padding: 5px 6px;
+        font-size: 11px;
+    }
+
+    .chip-value > span { font-size: 14px; }
+    .chip-value b { font-size: 9px; min-width: 38px; }
+
+    .player-score {
+        margin-top: 9px;
+        padding-top: 7px;
+        font-size: 11px;
+    }
+
+    .player-score b { font-size: 13px; }
+
+    .dice-card,
+    .turn-card {
+        padding: 15px;
+    }
+
+    .dice-card h2 { font-size: 20px; }
+
+    .dice-container {
+        gap: 8px;
+    }
+
+    .dice-player {
+        width: 55px;
+        height: 55px;
+        margin: auto;
+    }
+
+    .start-screen {
+        padding: 15px;
+    }
+
+    .start-box {
+        width: 100%;
+        max-width: 420px;
+        padding: 25px 18px;
+    }
+
+    .start-box h1 { font-size: 26px; }
+    .player-count { gap: 8px; }
+    .player-count-btn { padding: 11px 8px; font-size: 14px; }
+
+    .game-over-popup {
+        padding: 22px 16px;
+        border-radius: 20px;
+    }
+
+    .game-over-popup h1 {
+        font-size: 26px;
+        margin-bottom: 18px;
+    }
+
+    .winner,
+    .rank {
+        padding: 11px 12px;
+        font-size: 15px;
+    }
+
+    .winner { font-size: 17px; }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
     .game-container {
         padding: 10px 6px 25px;
     }
@@ -1255,14 +1429,14 @@ body {
         font-size: 23px;
     }
 
-    .center-game .board {
+    .board {
         width: 96vw !important;
         height: 96vw !important;
         padding: 5px;
         border-radius: 12px;
     }
 
-    .center-game .ludoBoard {
+    .ludoBoard {
         width: 92vw !important;
         height: 92vw !important;
         border-radius: 8px;
@@ -1274,44 +1448,24 @@ body {
         gap: 7px;
     }
 
-    .player-card {
-        padding: 9px;
-    }
-
-    .player-icon {
-        font-size: 23px;
-    }
-
-    .player-card h3 {
-        font-size: 14px;
-    }
+    .player-card { padding: 9px; }
+    .player-icon { font-size: 23px; }
+    .player-card h3 { font-size: 14px; }
+    .player-card span { font-size: 10px; }
 
     .mini-chips {
         gap: 4px;
         margin-top: 8px;
     }
 
-    .chip-value {
-        padding: 4px 5px;
-    }
-
-    .chip-value > span {
-        font-size: 13px;
-    }
-
-    .chip-value b {
-        font-size: 9px;
-    }
+    .chip-value { padding: 4px 5px; }
+    .chip-value > span { font-size: 13px; }
+    .chip-value b { font-size: 9px; }
 
     .player-score {
         margin-top: 8px;
         padding-top: 7px;
         font-size: 10px;
-    }
-
-    .good-luck,
-    .bottom-buttons {
-        width: 94vw;
     }
 
     .game-btn,
@@ -1320,44 +1474,8 @@ body {
         padding: 11px 15px;
     }
 
-    .dice-card h2 {
-        font-size: 20px;
-    }
-}
+    .dice-card h2 { font-size: 20px; }
 
-
-/* =========================================
-   VERY SMALL MOBILE
-========================================= */
-
-@media (max-width: 360px) {
-
-    .game-header h1 {
-        font-size: 20px;
-    }
-
-    .center-game .ludoBoard {
-        width: 93vw !important;
-        height: 93vw !important;
-    }
-
-    .player-card {
-        padding: 7px;
-    }
-
-    .player-card h3 {
-        font-size: 12px;
-    }
-
-    .player-card span {
-        font-size: 10px;
-    }
-
-    .chip-value b {
-        font-size: 8px;
-    }
-}
-@media (max-width: 480px) {
     .chip {
         width: 22px !important;
         height: 22px !important;
@@ -1367,4 +1485,19 @@ body {
         width: 100% !important;
         height: 100% !important;
     }
+}
+
+/* Very small mobile */
+@media (max-width: 360px) {
+    .game-header h1 { font-size: 20px; }
+
+    .ludoBoard {
+        width: 93vw !important;
+        height: 93vw !important;
+    }
+
+    .player-card { padding: 7px; }
+    .player-card h3 { font-size: 12px; }
+    .player-card span { font-size: 10px; }
+    .chip-value b { font-size: 8px; }
 }
