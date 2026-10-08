@@ -746,6 +746,7 @@ function showGameResult() {
 function selectPlayerCount(count) {
 
   totalPlayer = count;
+  
 
   let twoBtn = document.getElementById("twoPlayerBtn");
   let fourBtn = document.getElementById("fourPlayerBtn");
@@ -910,18 +911,3 @@ function resetGameData() {
   renderDice();
   renderPlayerValues();
 }
-function selectPlayerCount(count) {
-
-  totalPlayer = count;
-
-  let gameLayout = document.querySelector(".game-layout");
-
-  if (gameLayout) {
-    gameLayout.classList.toggle("two-player-mode", count === 2);
-  }
-
-  let twoBtn = document.getElementById("twoPlayerBtn");
-  let fourBtn = document.getElementById("fourPlayerBtn");
-
-  let player3 = document.getElementById("player3Input");
-  let player4 = document.getElementById("player4Input");
