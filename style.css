@@ -1485,6 +1485,23 @@ body {
         width: 100% !important;
         height: 100% !important;
     }
+        .game-layout.two-player-mode .left-panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .game-layout.two-player-mode .right-panel {
+        display: none;
+    }
+
+    .game-layout.two-player-mode .red-player,
+    .game-layout.two-player-mode .green-player {
+        grid-column: auto;
+        grid-row: auto;
+        width: 100%;
+    }
 }
 
 /* Very small mobile */
@@ -1500,4 +1517,94 @@ body {
     .player-card h3 { font-size: 12px; }
     .player-card span { font-size: 10px; }
     .chip-value b { font-size: 8px; }
+}
+
+/* =========================================
+   TWO PLAYER DESKTOP LAYOUT
+========================================= */
+
+@media (min-width: 651px) {
+
+    .game-layout.two-player-mode {
+        grid-template-columns:
+            minmax(160px, 210px)
+            minmax(420px, 1fr)
+            minmax(160px, 210px);
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Left panel ke players ko direct grid items banao */
+    .game-layout.two-player-mode .left-panel {
+        display: contents;
+    }
+
+    /* Right panel 2-player mode me hide */
+    .game-layout.two-player-mode .right-panel {
+        display: none;
+    }
+
+    /* Player 1 = Board ke left */
+    .game-layout.two-player-mode .red-player {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    /* Board = center */
+    .game-layout.two-player-mode .center-game {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    /* Player 2 = Board ke right */
+    .game-layout.two-player-mode .green-player {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    /* Current turn + dice */
+    .game-layout.two-player-mode > div:last-child {
+        grid-column: 2;
+        grid-row: 2;
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+}
+/* =========================================
+   MOBILE LAYOUT
+========================================= */
+
+@media (max-width: 650px) {
+
+    .game-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* 1. Board */
+    .center-game {
+        order: 1;
+        width: 100%;
+    }
+
+    /* 2. Turn + Dice immediately after board */
+    .game-layout > div:last-child {
+        order: 2;
+        width: 100%;
+    }
+
+    /* 3. Player 1 & 2 */
+    .left-panel {
+        order: 3;
+        width: 100%;
+    }
+
+    /* 4. Player 3 & 4 */
+    .right-panel {
+        order: 4;
+        width: 100%;
+    }
 }
