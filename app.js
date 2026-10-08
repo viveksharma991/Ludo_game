@@ -32,7 +32,7 @@ let road = [
 ];
 
 let turn = 0;
-let totalPlayer = 4;
+let totalPlayer = 2;
 let number = 0;
 let count6 = 0;
 let currentTurn;
