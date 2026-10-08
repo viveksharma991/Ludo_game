@@ -1608,3 +1608,113 @@ body {
         width: 100%;
     }
 }
+
+/* =========================================
+   2 PLAYER DESKTOP
+========================================= */
+
+@media (min-width: 651px) {
+
+    /* 2 player mode detect */
+    .game-layout:has(#player3Input.hidden-player) {
+        grid-template-columns:
+            minmax(160px, 210px)
+            minmax(420px, 1fr)
+            minmax(160px, 210px);
+    }
+
+    /* Left panel ko contents banakar
+       Player 1 aur Player 2 ko direct grid item */
+    .game-layout:has(#player3Input.hidden-player) .left-panel {
+        display: contents;
+    }
+
+    /* 2 player me right panel hide */
+    .game-layout:has(#player3Input.hidden-player) .right-panel {
+        display: none;
+    }
+
+    /* Player 1 - LEFT */
+    .game-layout:has(#player3Input.hidden-player) .red-player {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    /* Board - CENTER */
+    .game-layout:has(#player3Input.hidden-player) .center-game {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    /* Player 2 - RIGHT */
+    .game-layout:has(#player3Input.hidden-player) .green-player {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    /* Turn + Dice */
+    .game-layout:has(#player3Input.hidden-player) > div:last-child {
+        grid-column: 2;
+        grid-row: 2;
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .game-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* Board */
+    .center-game {
+        order: 1;
+        width: 100%;
+    }
+
+    /* CURRENT TURN + DICE
+       board ke just baad */
+    .game-layout > div:last-child {
+        order: 2;
+        width: 100%;
+    }
+
+    /* Player 1 + Player 2 */
+    .left-panel {
+        order: 3;
+        width: 100%;
+    }
+
+    /* Player 3 + Player 4 */
+    .right-panel {
+        order: 4;
+        width: 100%;
+    }
+
+
+    /* 2 PLAYER MOBILE */
+    .game-layout:has(#player3Input.hidden-player) .left-panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .game-layout:has(#player3Input.hidden-player) .right-panel {
+        display: none;
+    }
+
+    .game-layout:has(#player3Input.hidden-player) .red-player,
+    .game-layout:has(#player3Input.hidden-player) .green-player {
+        width: 100%;
+        margin: 0;
+    }
+}
